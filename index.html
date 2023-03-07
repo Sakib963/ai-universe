@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AI Universe Hub</title>
+
+        <!-- DaisyUI and Tailwind CSS Links -->
+        <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.3/dist/full.css"
+            rel="stylesheet" type="text/css" />
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Font Links -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&display=swap"
+            rel="stylesheet">
+        <!-- Font Awesome Kit -->
+        <script src="https://kit.fontawesome.com/1f3975a7ed.js"
+            crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header>
+            <h1 class="text-2xl md:text-4xl font-semibold text-black text-center mt-10">AI
+                Universe Hub</h1>
+            <div class="text-center mt-8 mb-12">
+                <button class="bg-[#EB5757] px-3 py-2 md:px-7 md:py-5 text-lg md:text-xl text-white
+                    rounded-2xl font-semibold" id="sort-button">Sort By Date</button>
+            </div>
+        </header>
+
+
+        <main class="container w-3/4 mx-auto">
+            <!-- Spinner Section -->
+            <section  id="spinner" class="hidden">
+                <div class="flex items-center justify-center">
+                    <div
+                      class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                      role="status">
+                      <span
+                        class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                        >Loading...</span
+                      >
+                    </div>
+                  </div>
+            </section>
+
+            <!-- Sorted Message -->
+            <section class="mb-10 hidden" id="sorted-message">
+                <div class="alert alert-success shadow-lg">
+                    <div class="mx-auto">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      <span>Cards Has Been Sorted By Date In Ascending Order.</span>
+                    </div>
+                  </div>
+            </section>
+
+            <!-- Not Found Message -->
+            <section id="no-found-message" class="hidden">
+                <div class="mt-4 text-center">
+                    <h3 class="text-warning text-3xl">No Tools Found, Please Try Again</h3>
+                </div>
+            </section>
+
+            <section>
+                <!-- Card Container -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12" id="card-container">
+                    <!-- Card Template -->
+                    <!-- <div class="card bg-base-100 shadow-xl border">
+                    <figure class="px-10 pt-10">
+                      <img src="https://picsum.photos/200" alt="Shoes" class="rounded-xl" />
+                    </figure>
+                    <div class="card-body">
+                      <h2 class="card-title">Features</h2>
+                      <ul class="list-decimal pl-4">
+                        <li>Natural language processing</li>
+                        <li>Contextual understanding</li>
+                        <li>Text generation</li>
+                      </ul>
+                      <hr>
+                      <div class="card-actions flex justify-between items-center">
+                        <div class="">
+                            <h1 class="card-title mb-2">ChatGPT</h1>
+                            <p><i class="fa-regular fa-calendar-days pr-2"></i>11/01/2022</p>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-arrow-right text-[#EB5757] bg-[#FEF7F7] p-4 rounded-full"></i>
+                          </div>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+
+                <!-- See More Button -->
+                <div class="text-center mb-12 hidden" id="see-more">
+                    <button class="bg-[#EB5757] px-3 py-2 md:px-7 md:py-5 text-lg md:text-xl text-white
+                        rounded-2xl font-semibold" id="see-more-button">See More</button>
+                </div>
+            </section>
+
+
+            <!-- Modal -->
+            <input type="checkbox" id="my-modal-5" class="modal-toggle" />
+            <div class="modal">
+
+                <div class="modal-box w-3/4 max-w-none relative pt-16">
+                    <label for="my-modal-5" class="btn btn-sm btn-circle absolute right-2 top-2 bg-[#EB5757]">✕</label>
+                    <div id="modal-container">
+                        <!-- <div class="grid grid-cols-1 md:grid-cols-2 w-3/4 mx-auto mb-10 gap-4">
+                            <div class="bg-[#eb57570d] p-7 rounded-lg border border-[#EB5757]">
+                                <h3 class="text-sm md:text-lg font-bold md:w-3/4 mb-2 md:mb-6">ChatGPT is an AI-powered chatbot platform that uses OpenAI's GPT technology to simulate human conversation.</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                                    <div class="bg-white p-3 md:p-5 rounded-xl font-bold text-[#03A30A]">
+                                        <h1>$19/month</h1>
+                                        <h1>Starter</h1>
+                                    </div>
+                                    <div class="bg-white p-3 md:p-5 rounded-xl font-bold text-[#F28927]">$50/month Pro</div>
+                                    <div class="bg-white p-3 md:p-5 rounded-xl font-bold text-[#EB5757]"><h1>Contact us for pricing</h1> <h1>Enterprise</h1></div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    <div>
+                                        <h1 class="text-lg font-bold mb-3">Features</h1>
+                                        <ul class="space-y-2 text-[#585858] list-disc pl-4">
+                                            <li>Customizable responses</li>
+                                            <li>Multilingual support</li>
+                                            <li>Seamless integration</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h1 class="text-lg font-bold mb-3">Integrations</h1>
+                                        <ul class="space-y-2 text-[#585858] list-disc pl-4">
+                                            <li>FB Messenger</li>
+                                            <li>Slack</li>
+                                            <li>Telegram</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border rounded-lg p-5">
+                                <div class=" relative">
+                                    <img src="https://picsum.photos/200" alt="" class="w-full rounded-xl">
+                                    <h1 class="bg-red-600 px-2 md:px-4 py-2 rounded-xl absolute top-2 md:top-4 right-2 md:right-4 text-white">Accuracy: 98%</h1>
+                                </div>
+                                <div class="text-center">
+                                    <h1 class="md:text-2xl font-bold">Hey, How are you Doing Today</h1>
+                                    <h1 class="text-sm md:text-xl">I'm doing well, thank you for asking. How can I assist you today?</h1>
+                                </div>
+            
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- JS File Link -->
+        <script src="js/app.js"></script>
+
+    </body>
+</html>
